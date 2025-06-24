@@ -1,7 +1,7 @@
 // Description: Parameterized synchronous FIFO using MSB toggle-based full/empty detection.
 `timescale 1ns / 1ps
 
-module fifo_sync(
+module fifo_sync_msb(
     input clk,   
     input rst,
     input wr_en,
