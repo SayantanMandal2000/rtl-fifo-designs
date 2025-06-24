@@ -1,7 +1,7 @@
 // Description: Parameterized synchronous FIFO using counter-based full/empty detection.
 `timescale 1ns / 1ps
 
-module sync_fifo(
+module sync_fifo_counter(
     input clk,   
     input rst,
     input wr_en,
