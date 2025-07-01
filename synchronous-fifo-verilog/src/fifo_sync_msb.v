@@ -17,13 +17,11 @@ module fifo_sync_msb(
     parameter DEPTH=1<<ADDR_WIDTH;  // Total number of FIFO entries , depth=2^3=8
     
     
-    reg [DATA_WIDTH-1:0] mem[0:DEPTH-1];  
+    reg [DATA_WIDTH-1:0] mem[0:DEPTH-1];  // RAM type FIFO Memory
     reg [ADDR_WIDTH:0] wr_ptr,rd_ptr; 
     
     
-    // =========================================================================
     // WRITE OPERATION: Pushes data into FIFO memory when write enabled and not full
-    // =========================================================================
     always@(posedge clk) begin
         if(rst)
             wr_ptr<=0;
@@ -33,7 +31,6 @@ module fifo_sync_msb(
         end
     end
     
-    // =========================================================================
     // READ OPERATION: Retrieves data from FIFO memory when enabled and not empty
     always@(posedge clk) begin
         if(rst) begin
@@ -46,7 +43,6 @@ module fifo_sync_msb(
         end
     end
     
-    // =========================================================================
     // Status flag
     assign full=((wr_ptr[ADDR_WIDTH]!=rd_ptr[ADDR_WIDTH]) && (wr_ptr[ADDR_WIDTH-1:0]==rd_ptr[ADDR_WIDTH-1:0]));
     assign empty=(wr_ptr==rd_ptr);
