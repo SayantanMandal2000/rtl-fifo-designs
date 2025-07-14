@@ -38,3 +38,14 @@ This repository contains Verilog-based RTL implementations of both **Synchronous
 <p align="center">
   <img src="Async_FIFO_Block.png" alt="Asynchronous FIFO RTL Diagram" width="700"/>
 </p>
+
+---
+
+## 🧪 Testbench Support
+
+Both designs are fully testbench-driven.  
+The testbenches include:
+- Reset and initialization sequences
+- Data push into FIFO (`wr_en`)
+- Data read from FIFO (`rd_en`)
+- Observation of status flags under different scenarios
