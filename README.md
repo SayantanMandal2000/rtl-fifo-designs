@@ -91,7 +91,7 @@ These designs are built for clarity, modularity, and synthesis compatibility for
 
 ### Asynchronous FIFO (Dual Clock)
 <p align="center">
-  <img src="Async_FIFO_Block.png" alt="Asynchronous FIFO RTL Diagram" width="700"/>
+  <img src="https://github.com/SayantanMandal2000/rtl-fifo-designs/blob/main/asynchronous-dual-clock-fifo/sim/Async_FIFO_RTL.png" alt="Asynchronous FIFO RTL Diagram" width="700"/>
 </p>
 
 ---
