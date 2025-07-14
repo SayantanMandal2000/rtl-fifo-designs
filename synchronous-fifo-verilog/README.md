@@ -24,7 +24,24 @@ A synthesizable RTL design of a **Synchronous FIFO (First-In First-Out)** buffer
 
 ---
 
-## 🔧 Design Block Diagram
+## 🔧 RTL Design Block Diagram
+
+The following block diagram represents the internal RTL structure of the synchronous FIFO design:
+
+- **Write Path**:  
+  The `wr_data` input is written into the memory block when `wr_en` is asserted and the FIFO is not full. A write pointer (`wr_ptr`) tracks the write address, incrementing on every valid write. The `full` flag is asserted when the write pointer is about to overlap the read pointer.
+
+- **Read Path**:  
+  Data is read from the memory and registered at the output `rd_data` when `rd_en` is asserted and the FIFO is not empty. A read pointer (`rd_ptr`) keeps track of the read location. The `empty` flag is asserted when both read and write pointers are equal.
+
+- **Memory Block (`mem_reg`)**:  
+  Acts as the storage element for the FIFO, implemented as a dual-port RAM that allows simultaneous read and write operations.
+
+- **Pointer Logic**:  
+  Separate binary counters for `wr_ptr` and `rd_ptr` manage read/write indexing. These are compared using combinational logic to generate `full` and `empty` flags based on pointer equality and offset conditions.
+
+- **Registering Logic**:  
+  Read data is registered at the output (`rd_data_reg`) to maintain stable timing and data integrity, aligning with synchronous design principles.
 
 <p align="center">
   <img src="https://github.com/SayantanMandal2000/rtl-fifo-designs/blob/main/synchronous-fifo-verilog/images/Sync_FIFO_RTL.png" alt="FIFO RTL Block Diagram" width="700"/>
