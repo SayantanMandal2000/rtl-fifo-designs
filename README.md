@@ -1,4 +1,9 @@
 #  RTL FIFO Designs in Verilog
+![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
+![Language: Verilog](https://img.shields.io/badge/language-Verilog-yellow.svg)
+![Build: Simulated](https://img.shields.io/badge/build-simulated-green)
+![Waveform: Vivado](https://img.shields.io/badge/waveform-GTKwave-blue)
+![FSM: Implemented](https://img.shields.io/badge/FSM-Implemented-red)
 
 This repository contains Verilog-based RTL implementations of both **Synchronous** and **Asynchronous (Dual-Clock)** FIFO (First-In First-Out) buffers, widely used in digital systems for temporary data storage, clock domain crossing, and communication between different subsystems.
 
@@ -26,10 +31,10 @@ This repository contains Verilog-based RTL implementations of both **Synchronous
 
 ### Synchronous FIFO
 <p align="center">
-  <img src="Sync_FIFO_msb_schema.png" alt="Synchronous FIFO Diagram" width="700"/>
+  <img src="https://github.com/SayantanMandal2000/rtl-fifo-designs/blob/main/synchronous-fifo-verilog/images/Sync_FIFO_RTL.png" alt="Synchronous FIFO RTL Diagram" width="700"/>
 </p>
 
 ### Asynchronous FIFO (Dual Clock)
 <p align="center">
-  <img src="Async_FIFO_Block.png" alt="Asynchronous FIFO Block" width="700"/>
+  <img src="Async_FIFO_Block.png" alt="Asynchronous FIFO RTL Diagram" width="700"/>
 </p>
