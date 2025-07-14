@@ -12,6 +12,7 @@ This repository contains Verilog-based RTL implementations of both **Synchronous
 ## 📘 Description
 
 🟢 **Synchronous FIFO** – Uses a single clock for both read and write operations.
+
 🔵 **Asynchronous FIFO** – Uses separate, independent clocks for write and read operations.
 
 Both modules are essential components in digital design, especially in **System-on-Chip (SoC)** architectures where data needs to be buffered, streamed, or transferred safely across different modules or clock domains.
