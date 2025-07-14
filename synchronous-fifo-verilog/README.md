@@ -27,7 +27,7 @@ A synthesizable RTL design of a **Synchronous FIFO (First-In First-Out)** buffer
 ## 🔧 Design Block Diagram
 
 <p align="center">
-  <img src="Sync_FIFO_msb_schema.png" alt="FIFO Block Diagram" width="700"/>
+  <img src="https://github.com/SayantanMandal2000/rtl-fifo-designs/blob/main/synchronous-fifo-verilog/images/Sync_FIFO_RTL.png" alt="FIFO RTL Block Diagram" width="700"/>
 </p>
 
 ---
@@ -43,7 +43,7 @@ The **write and read pointers** are updated using synchronous counters. The **fu
 ## 📈 Simulation Waveform
 
 <p align="center">
-  <img src="Sync_FIFO_waveform.png" alt="FIFO Simulation Waveform" width="800"/>
+  <img src="https://github.com/SayantanMandal2000/rtl-fifo-designs/blob/main/synchronous-fifo-verilog/images/Sync_FIFO_waveform.png" alt="FIFO Simulation Waveform" width="800"/>
 </p>
 
 The waveform shows:
