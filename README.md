@@ -80,6 +80,28 @@ These designs are built for clarity, modularity, and synthesis compatibility for
   - Safe and robust cross-domain design
   - Integrated modules like `convert_b2g`, `convert_g2b`, and synchronizers
 
+## ⏱️ Flag Logic
+
+- `full`: Write pointer is one step behind the (inverted MSBs of) synchronized read pointer
+- `empty`: Read pointer matches the synchronized write pointer
+- Flags are computed using either binary or Gray-coded comparison logic depending on the architecture
+
+---
+
+
+## 📌 Project Highlights
+
+| Feature                     | Synchronous FIFO                  | Asynchronous FIFO              |
+|----------------------------|-----------------------------------|-------------------------------|
+| Clock Domains              | Single clock (`clk`)              | Dual clocks (`w_clk`, `r_clk`)|
+| Pointer Format             | Binary                            | Gray code                     |
+| Synchronization            | Not required                      | Required (`sync_r2w`, `sync_w2r`) |
+| Use Case                   | Same-clock systems                | CDC (Clock Domain Crossing)   |
+| Status Flags               | `full`, `empty`                   | `full`, `empty`               |
+| Extras                     | Registered output, clean counters | Gray code + synchronizers     |
+| Testbench                  | Included                          | Included                      |
+| Waveform                   | GTKWave compatible                | GTKWave compatible            |
+
 ---
 
 ## 🔧 RTL Block Diagrams
@@ -104,3 +126,32 @@ The testbenches include:
 - Data push into FIFO (`wr_en`)
 - Data read from FIFO (`rd_en`)
 - Observation of status flags under different scenarios
+
+  
+Use [GTKWave](http://gtkwave.sourceforge.net/) to inspect `vcd` waveform outputs.
+
+---
+
+## 📁 Folder Structure
+
+```bash
+rtl-fifo-designs/
+│
+├── synchronous-fifo-verilog/
+│   ├── fifo_sync.v
+│   ├── tb_fifo_sync.v
+│   └── images/
+│       └── Sync_FIFO_RTL.png
+│       └── Sync_FIFO_waveform.png
+│
+├── asynchronous-dual-clock-fifo/
+│   ├── async_fifo.v
+│   ├── fifo_mem.v
+│   ├── full.v
+│   ├── empty.v
+│   ├── sync_r2w.v
+│   ├── sync_w2r.v
+│   ├── tb_async_fifo.v
+│   └── sim/
+│       └── Async_FIFO_RTL.png
+│       └── Async_FIFO_waveform.png
