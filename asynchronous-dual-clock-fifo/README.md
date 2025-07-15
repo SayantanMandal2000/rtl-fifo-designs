@@ -50,10 +50,10 @@ The following diagram illustrates the internal architecture of the asynchronous 
 
 - **Synchronization Modules**:  
   Two flip-flop-based synchronizers (`sync_w2r`, `sync_r2w`) handle the safe transfer of Gray-coded pointers across clock domains.
-  <p align="center">
+<p align="center">
   <img src="https://github.com/SayantanMandal2000/rtl-fifo-designs/blob/main/asynchronous-dual-clock-fifo/sim/Async_FIFO_syncw2r_RTL.png" alt="Async FIFO RTL Diagram" width="700"/>
 </p>
-  <p align="center">
+<p align="center">
   <img src="https://github.com/SayantanMandal2000/rtl-fifo-designs/blob/main/asynchronous-dual-clock-fifo/sim/Async_FIFO_syncr2w_RTL.png" alt="Async FIFO RTL Diagram" width="700"/>
 </p>
 
@@ -92,10 +92,32 @@ In modern SoC and FPGA designs, it is common to have components operating on **d
   <img src="https://github.com/SayantanMandal2000/rtl-fifo-designs/blob/main/asynchronous-dual-clock-fifo/sim/Async_FIFO_waveform.png" alt="FIFO Simulation Waveform" width="800"/>
 </p>
 
-The waveform shows:
-- Write operations filling the FIFO until `full = 1`
-- Read operations consuming the data correctly
-- `empty = 1` once all data is read out
+###✅ Observations:
+**Independent Clock Domains:**
+w_clk (write clock) and r_clk (read clock) operate at different frequencies, demonstrating true asynchronous behavior.
+
+**Data Flow:**
+Random hexadecimal data values (wdata) are written sequentially when wr_rq is high and full is low. The corresponding data is read out on the r_clk domain when rd_rq is high and empty is low.
+
+**Pointer Behavior:**
+wptr (write pointer) increments on every successful write.
+rptr (read pointer) increments on every successful read.
+Both are implemented in Gray code internally for cross-domain synchronization.
+
+**FIFO Status Flags:**
+full goes high temporarily when the FIFO is filled up faster than it is read.
+empty clears only after valid data is read, and goes high again after the FIFO is fully drained.
+At no point do we see undefined values in rdata, which confirms synchronization safety.
+
+**Memory Array:***
+The fifo[7:0] array reflects the internal dual-port memory buffer. Data written is visible here before being read out, showing proper retention and queue behavior.
+
+###🧠 What This Proves:
+
+The design correctly prevents overflow and underflow by asserting full and empty flags using synchronized pointers.
+Gray code synchronization across clock domains ensures metastability-free operation.
+The FIFO maintains data order, and pointer wraparound is handled without glitches.
+The testbench verifies that writes and reads in independent domains do not interfere, even when clock ratios vary.
 
 ---
 
