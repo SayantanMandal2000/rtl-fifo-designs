@@ -45,7 +45,7 @@ The following diagram illustrates the internal architecture of the asynchronous 
   A dual-port RAM is used to store the data, with concurrent read/write access controlled by the respective clock domains.
 
 <p align="center">
-  <img src="https://github.com/SayantanMandal2000/rtl-fifo-designs/blob/main/asynchronous-dual-clock-fifo/sim/Async_FIFO_memeRAM_RTL.png" alt="Async FIFO RTL Diagram" width="700"/>
+  <img src="https://github.com/SayantanMandal2000/rtl-fifo-designs/blob/main/asynchronous-dual-clock-fifo/sim/Async_FIFO_memRAM_RTL.png" alt="Async FIFO RTL Diagram" width="700"/>
 </p>
 
 - **Synchronization Modules**:  
@@ -93,24 +93,27 @@ In modern SoC and FPGA designs, it is common to have components operating on **d
 </p>
 
 ###✅ Observations:
-**Independent Clock Domains:**
-w_clk (write clock) and r_clk (read clock) operate at different frequencies, demonstrating true asynchronous behavior.
 
-**Data Flow:**
-Random hexadecimal data values (wdata) are written sequentially when wr_rq is high and full is low. The corresponding data is read out on the r_clk domain when rd_rq is high and empty is low.
+-**Independent Clock Domains:**
+'w_clk' (write clock) and r_clk (read clock) operate at different frequencies, demonstrating true asynchronous behavior.
 
-**Pointer Behavior:**
-wptr (write pointer) increments on every successful write.
-rptr (read pointer) increments on every successful read.
+-**Data Flow:**
+Random hexadecimal data values (wdata) are written sequentially when 'wr_rq' is high and 'full' is low. The corresponding data is read out on the r_clk domain when 'rd_rq' is high and 'empty' is low.
+
+-**Pointer Behavior:**
+'wptr' (write pointer) increments on every successful write.
+'rptr' (read pointer) increments on every successful read.
 Both are implemented in Gray code internally for cross-domain synchronization.
 
-**FIFO Status Flags:**
-full goes high temporarily when the FIFO is filled up faster than it is read.
-empty clears only after valid data is read, and goes high again after the FIFO is fully drained.
+-**FIFO Status Flags:**
+'full' goes high temporarily when the FIFO is filled up faster than it is read.
+'empty' clears only after valid data is read, and goes high again after the FIFO is fully drained.
 At no point do we see undefined values in rdata, which confirms synchronization safety.
 
-**Memory Array:***
-The fifo[7:0] array reflects the internal dual-port memory buffer. Data written is visible here before being read out, showing proper retention and queue behavior.
+-**Memory Array:***
+The 'fifo[7:0]' array reflects the internal dual-port memory buffer. Data written is visible here before being read out, showing proper retention and queue behavior.
+
+---
 
 ###🧠 What This Proves:
 
