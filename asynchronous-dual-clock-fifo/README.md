@@ -30,17 +30,36 @@ The following diagram illustrates the internal architecture of the asynchronous 
 - **Write Path**:  
   Data is written into FIFO memory when `wr_rq` is asserted and the FIFO is not full. A **Gray-coded write pointer** is updated and synchronized into the read clock domain for `empty` detection.
 
+  <p align="center">
+  <img src="https://github.com/SayantanMandal2000/rtl-fifo-designs/blob/main/asynchronous-dual-clock-fifo/sim/Async_FIFO_Empty_RTL.png" alt="Async FIFO RTL Diagram" width="700"/>
+</p>
+
 - **Read Path**:  
   Data is read from memory when `rd_rq` is asserted and the FIFO is not empty. A **Gray-coded read pointer** is updated and synchronized into the write clock domain for `full` detection.
+
+<p align="center">
+  <img src="https://github.com/SayantanMandal2000/rtl-fifo-designs/blob/main/asynchronous-dual-clock-fifo/sim/Async_FIFO_Full_RTL.png" alt="Async FIFO RTL Diagram" width="700"/>
+</p>
 
 - **Memory Block**:  
   A dual-port RAM is used to store the data, with concurrent read/write access controlled by the respective clock domains.
 
+<p align="center">
+  <img src="https://github.com/SayantanMandal2000/rtl-fifo-designs/blob/main/asynchronous-dual-clock-fifo/sim/Async_FIFO_memeRAM_RTL.png" alt="Async FIFO RTL Diagram" width="700"/>
+</p>
+
 - **Synchronization Modules**:  
   Two flip-flop-based synchronizers (`sync_w2r`, `sync_r2w`) handle the safe transfer of Gray-coded pointers across clock domains.
+  <p align="center">
+  <img src="https://github.com/SayantanMandal2000/rtl-fifo-designs/blob/main/asynchronous-dual-clock-fifo/sim/Async_FIFO_syncw2r_RTL.png" alt="Async FIFO RTL Diagram" width="700"/>
+</p>
+  <p align="center">
+  <img src="https://github.com/SayantanMandal2000/rtl-fifo-designs/blob/main/asynchronous-dual-clock-fifo/sim/Async_FIFO_syncr2w_RTL.png" alt="Async FIFO RTL Diagram" width="700"/>
+</p>
 
+- **Asynchronous Dual-clock FIFO Top Module**: 
 <p align="center">
-  <img src="https://github.com/SayantanMandal2000/rtl-fifo-designs/blob/main/asynchronous-dual-clock-fifo/images/Async_FIFO_RTL.png" alt="Async FIFO RTL Diagram" width="700"/>
+  <img src="https://github.com/SayantanMandal2000/rtl-fifo-designs/blob/main/asynchronous-dual-clock-fifo/sim/Async_FIFO_RTL.png" alt="Async FIFO RTL Diagram" width="700"/>
 </p>
 
 ---
@@ -70,7 +89,7 @@ In modern SoC and FPGA designs, it is common to have components operating on **d
 ## 📈 Simulation Waveform
 
 <p align="center">
-  <img src="https://github.com/SayantanMandal2000/rtl-fifo-designs/blob/main/asynchronous-dual-clock-fifo/images/Async_FIFO_waveform.png" alt="FIFO Simulation Waveform" width="800"/>
+  <img src="https://github.com/SayantanMandal2000/rtl-fifo-designs/blob/main/asynchronous-dual-clock-fifo/sim/Async_FIFO_waveform.png" alt="FIFO Simulation Waveform" width="800"/>
 </p>
 
 The waveform shows:
