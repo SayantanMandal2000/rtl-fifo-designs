@@ -3,7 +3,7 @@
 ![Language: Verilog](https://img.shields.io/badge/language-Verilog-yellow.svg)
 ![Build: Simulated](https://img.shields.io/badge/build-simulated-green)
 ![Waveform: Vivado](https://img.shields.io/badge/waveform-GTKwave-blue)
-![FSM: Implemented](https://img.shields.io/badge/FSM-Implemented-red)
+
 
 This repository contains Verilog-based RTL implementations of both **Synchronous** and **Asynchronous (Dual-Clock)** FIFO (First-In First-Out) buffers, widely used in digital systems for temporary data storage, clock domain crossing, and communication between different subsystems.
 
