@@ -92,35 +92,37 @@ In modern SoC and FPGA designs, it is common to have components operating on **d
   <img src="https://github.com/SayantanMandal2000/rtl-fifo-designs/blob/main/asynchronous-dual-clock-fifo/sim/Async_FIFO_waveform.png" alt="FIFO Simulation Waveform" width="800"/>
 </p>
 
-###✅ Observations:
+### ✅ Observations
 
--**Independent Clock Domains:**
-'w_clk' (write clock) and r_clk (read clock) operate at different frequencies, demonstrating true asynchronous behavior.
+- **Independent Clock Domains**  
+  `w_clk` (write clock) and `r_clk` (read clock) operate at different frequencies, demonstrating true asynchronous behavior.
 
--**Data Flow:**
-Random hexadecimal data values (wdata) are written sequentially when 'wr_rq' is high and 'full' is low. The corresponding data is read out on the r_clk domain when 'rd_rq' is high and 'empty' is low.
+- **Data Flow**  
+  Random hexadecimal data values (`wdata`) are written sequentially when `wr_rq` is high and `full` is low. The corresponding data is read out on the `r_clk` domain when `rd_rq` is high and `empty` is low.
 
--**Pointer Behavior:**
-'wptr' (write pointer) increments on every successful write.
-'rptr' (read pointer) increments on every successful read.
-Both are implemented in Gray code internally for cross-domain synchronization.
+- **Pointer Behavior**  
+  - `wptr` (write pointer) increments on every successful write.  
+  - `rptr` (read pointer) increments on every successful read.  
+  - Both are internally maintained using **Gray code** to ensure safe cross-domain synchronization.
 
--**FIFO Status Flags:**
-'full' goes high temporarily when the FIFO is filled up faster than it is read.
-'empty' clears only after valid data is read, and goes high again after the FIFO is fully drained.
-At no point do we see undefined values in rdata, which confirms synchronization safety.
+- **FIFO Status Flags**  
+  - `full` is asserted when the FIFO fills faster than it is being read.  
+  - `empty` clears once data is available and is set again after the FIFO is fully drained.  
+  - At no point do we observe undefined (`X`) values in `rdata`, confirming proper synchronization and data integrity.
 
--**Memory Array:***
-The 'fifo[7:0]' array reflects the internal dual-port memory buffer. Data written is visible here before being read out, showing proper retention and queue behavior.
+- **Memory Array**  
+  The internal `fifo[7:0]` dual-port memory correctly captures all writes and outputs the expected data on valid reads, verifying queue correctness.
 
 ---
 
-###🧠 What This Proves:
+### 🧠 What This Proves
 
-The design correctly prevents overflow and underflow by asserting full and empty flags using synchronized pointers.
-Gray code synchronization across clock domains ensures metastability-free operation.
-The FIFO maintains data order, and pointer wraparound is handled without glitches.
-The testbench verifies that writes and reads in independent domains do not interfere, even when clock ratios vary.
+- ✅ Proper **overflow** and **underflow** prevention using synchronized `full` and `empty` flag logic  
+- ✅ Metastability-free operation through **Gray code pointer synchronization**  
+- ✅ Correct **order preservation** of data across clock domains  
+- ✅ **Pointer wrap-around** handled without glitches  
+- ✅ **Testbench verifies** that operations on asynchronous clocks do not interfere, even with mismatched frequencies
+
 
 ---
 
@@ -146,5 +148,5 @@ The included testbench verifies:
 | `empty.v`              | Empty flag generation logic (read domain)      |
 | `tb_async_fifo.v`      | Testbench with clock gen and stimulus          |
 | `Async_FIFO_RTL.png`   | RTL block diagram of the FIFO                  |
-| `Async_FIFO_waveform.png` | Simulation waveform from GTKWave           |
+| `Async_FIFO_waveform.png` | Simulation waveform from GTKWave            |
 
